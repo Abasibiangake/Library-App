@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/librarybackground"
+    android:backgroundTint="@color/fade"
+    android:backgroundTintMode="src_over"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".StudentSignUpActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="STUDENT SIGNUP ACTIVITY"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="match_parent"
+        android:layout_height="202dp"
+        android:layout_marginTop="35dp"
+        android:alpha="0.8"
+        android:src="@drawable/librarylogo" />
+
+    <EditText
+        android:id="@+id/studentID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="StudentID"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginTop="35dp"/>
+
+    <EditText
+        android:id="@+id/studentPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Student Password"
+        android:layout_marginHorizontal="35dp"/>
+    <EditText
+        android:id="@+id/studentFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:layout_marginHorizontal="35dp"/>
+    <EditText
+        android:id="@+id/studentLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:layout_marginHorizontal="35dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginHorizontal="35dp"
+        android:text="STUDENT SIGNUP"
+        android:backgroundTint="@color/grey"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginHorizontal="35dp"
+        android:text="BACK TO MAIN ACTIVITY"
+        android:backgroundTint="@color/grey"/>
+
+
+</LinearLayout>
+
+<!--    androidx.constraintlayout.widget.Constraint-->
