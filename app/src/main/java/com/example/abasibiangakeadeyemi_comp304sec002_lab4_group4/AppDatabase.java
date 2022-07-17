@@ -1,18 +1,14 @@
 package com.example.abasibiangakeadeyemi_comp304sec002_lab4_group4;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import android.content.Context;
-
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 //this is the room database class
 @Database(entities = {Student.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-   private static volatile AppDatabase INSTANCE;
+    private static volatile AppDatabase INSTANCE;
 //    private static final int NUMBER_OF_THREADS = 4;
 //    //use this to run database operations asychronously
 //    //on a background thread.

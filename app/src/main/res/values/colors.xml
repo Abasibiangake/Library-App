@@ -10,4 +10,7 @@
     <color name="fade">#80FFFFFF</color>
     <color name="red">#710404</color>
     <color name="grey">#4C4B4B</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#3F51B5</color>
 </resources>

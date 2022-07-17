@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadLibrarianLoginScreen(View view) {
-       intent = new Intent(MainActivity.this, LibrarianLoginActivity.class);
+        intent = new Intent(MainActivity.this, LibrarianLoginActivity.class);
         startActivity(intent);
     }
 
