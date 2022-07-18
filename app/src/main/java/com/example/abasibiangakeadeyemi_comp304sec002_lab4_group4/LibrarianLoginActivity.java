@@ -44,8 +44,8 @@ public class LibrarianLoginActivity extends AppCompatActivity {
                     outputLibrarianPassword += librarian.getPassword() + "\n";
                     outputLibrarianFirstName += librarian.getFirstName() + "\n";
                 }
-                Toast.makeText(LibrarianLoginActivity.this,
-                        outputLibrarianID +", "+outputLibrarianPassword, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LibrarianLoginActivity.this,
+//                        outputLibrarianID +", "+outputLibrarianPassword, Toast.LENGTH_SHORT).show();
 
                 btnLibrarianLogin = findViewById(R.id.btnLibrarianLogin);
                 btnLibrarianLogin.setOnClickListener(new View.OnClickListener() {
