@@ -48,16 +48,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:text="STUDENT ID"
+                android:hint="ENTER YOU STUDENT ID"
+                android:inputType="number"
                 android:layout_marginHorizontal="35dp"/>
             <EditText
                 android:id="@+id/studentLoginPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="STUDENT PASSWORD"
+                android:hint="ENTER YOUR PASSWORD"
+                android:inputType="textPassword"
                 android:layout_marginHorizontal="35dp"/>
 
             <Button
+                android:id="@+id/btnStudentLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="35dp"

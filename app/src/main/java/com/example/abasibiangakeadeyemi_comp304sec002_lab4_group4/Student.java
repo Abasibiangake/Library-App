@@ -12,6 +12,7 @@ public class Student {
     private String password;
     private int bookId;
 
+//    public Student(){}
     public Student(int studentId, String firstname, String lastname, String password) {
         this.studentId = studentId;
         this.firstname = firstname;

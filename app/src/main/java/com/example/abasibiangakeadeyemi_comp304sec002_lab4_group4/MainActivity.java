@@ -7,13 +7,28 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Intent intent;
+    private StudentViewModel studentViewModel;
+
+    //Student login page
+    private EditText editStudentLoginId;
+    private EditText editStudentLoginPassword;
+    private Button btnStudentLogin;
+    //librarian login page
+    private EditText editLibrarianLoginId;
+    private EditText editLibrarianLoginPassword;
+    private Button btnLoginLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     public void loadLibrarianLoginScreen(View view) {
