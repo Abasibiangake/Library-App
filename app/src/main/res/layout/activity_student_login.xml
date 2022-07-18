@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/librarybackground"
+    android:backgroundTint="@color/fade"
+    android:backgroundTintMode="src_over"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".StudentLoginActivity">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginTop="45dp"
+        android:alpha="0.8"
+        android:src="@drawable/librarylogo" />
+
+    <FrameLayout
+        android:id="@+id/loadLoginFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:layout_margin="25dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="STUDENT LOGIN ACTIVITY"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+
+            <EditText
+                android:id="@+id/studentLoginID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:hint="ENTER YOU STUDENT ID"
+                android:inputType="number"
+                android:layout_marginHorizontal="35dp"/>
+            <EditText
+                android:id="@+id/studentLoginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ENTER YOUR PASSWORD"
+                android:inputType="textPassword"
+                android:layout_marginHorizontal="35dp"/>
+
+            <Button
+                android:id="@+id/btnStudentLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="35dp"
+                android:layout_marginTop="35dp"
+                android:backgroundTint="@color/grey"
+                android:text="STUDENT LOGIN" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>
