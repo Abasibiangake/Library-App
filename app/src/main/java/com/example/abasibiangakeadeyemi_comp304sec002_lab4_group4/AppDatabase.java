@@ -1,7 +1,9 @@
 package com.example.abasibiangakeadeyemi_comp304sec002_lab4_group4;
 
 import androidx.annotation.NonNull;
+import androidx.room.AutoMigration;
 import androidx.room.Database;
+import androidx.room.DeleteColumn;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
@@ -10,7 +12,17 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 //this is the room database class
-@Database(entities = {Librarian.class, Student.class,Books.class}, version = 2)
+@Database(
+
+        entities = {Librarian.class, Student.class,Books.class}, version = 3
+//        exportSchema = true,
+//
+//        autoMigrations = {
+//        @AutoMigration(from = 2, to = 3)
+//        }
+
+
+)
 public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase INSTANCE;
 
