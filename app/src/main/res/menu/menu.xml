@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fiction"
+        android:title="Fiction">
+
+    </item>
+    <item
+        android:id="@+id/non_fiction"
+        android:title="Non-fiction">
+
+    </item>
+    <item
+        android:id="@+id/educational"
+        android:title="Educational">
+
+    </item>
+
+    <item
+        android:id="@+id/history"
+        android:title="History">
+
+    </item>
+
+
+
+</menu>

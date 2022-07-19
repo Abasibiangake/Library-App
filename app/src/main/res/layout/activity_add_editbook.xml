@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:orientation="vertical"
+android:layout_height="match_parent"
+android:padding="16dp"
+tools:context=".AddEditbookActivity">
+
+<EditText
+    android:id="@+id/book_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Book title"
+    android:inputType="text"
+    />
+<EditText
+    android:id="@+id/book_author"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Author"
+    android:inputType="text"
+    />
+<EditText
+    android:id="@+id/book_quantity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Quantity"
+    android:inputType="number"
+    />
+<EditText
+    android:id="@+id/book_category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Category"
+    android:inputType="text"
+    />
+
+<EditText
+    android:id="@+id/book_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Description"
+    android:inputType="textMultiLine"
+    />
+<Button
+    android:id="@+id/add_book_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="20dp"
+    android:text="Save Book"
+    android:onClick="saveBook"
+    />
+
+</LinearLayout>
