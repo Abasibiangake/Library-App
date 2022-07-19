@@ -43,6 +43,26 @@ public class AddEditbookActivity extends AppCompatActivity {
         }
     }
 
+//    public void intentHelper(String categoryName, String category,  String author, int quantity,
+//                             String description, String title
+//                             ){
+//        if (category.equals(categoryName)) {
+//
+//            Intent intent = new Intent();
+//            intent.putExtra(EXTRA_FICTION_AUTHOR, author);
+//            intent.putExtra(EXTRA_FICTION_QUANTITY, quantity);
+//            intent.putExtra(EXTRA_FICTION_CATEGORY, category);
+//            intent.putExtra(EXTRA_FICTION_DESCRIPTION, description);
+//            intent.putExtra(EXTRA_FICTION_TITLE, title);
+//            int id = getIntent().getIntExtra(EXTRA_ID, -1);
+//            if (id != -1) {
+//                intent.putExtra(EXTRA_ID, id);
+//            }
+//            setResult(RESULT_OK, intent);
+//            finish();
+//        }
+//    }
+
     public void saveBook(View view) {
         String title = editTextTitle.getText().toString();
         String category = editTextCategory.getText().toString();
@@ -54,8 +74,6 @@ public class AddEditbookActivity extends AppCompatActivity {
             Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (category.equals("Fiction")) {
-
             Intent intent = new Intent();
             intent.putExtra(EXTRA_FICTION_AUTHOR, author);
             intent.putExtra(EXTRA_FICTION_QUANTITY, quantity);
@@ -68,7 +86,5 @@ public class AddEditbookActivity extends AppCompatActivity {
             }
             setResult(RESULT_OK, intent);
             finish();
-        }
-
     }
 }

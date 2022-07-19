@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_add_editbook.xml" value="0.14010416666666667" />
+        <entry key="app/src/main/res/layout/activity_educational.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/activity_fiction2.xml" value="0.28804347826086957" />
+        <entry key="app/src/main/res/layout/activity_history.xml" value="0.15833333333333333" />
+        <entry key="app/src/main/res/layout/activity_horror2.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/activity_librarian_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2733333333333333" />
+        <entry key="app/src/main/res/layout/activity_non_fiction.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_student_sign_up.xml" value="0.165" />
         <entry key="app/src/main/res/layout/book_items.xml" value="0.28804347826086957" />

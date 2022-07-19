@@ -1,34 +1,33 @@
 package com.example.abasibiangakeadeyemi_comp304sec002_lab4_group4;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+        import androidx.annotation.NonNull;
+        import androidx.annotation.Nullable;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.fragment.app.Fragment;
+        import androidx.lifecycle.Observer;
+        import androidx.lifecycle.ViewModelProvider;
+        import androidx.recyclerview.widget.ItemTouchHelper;
+        import androidx.recyclerview.widget.LinearLayoutManager;
+        import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.Menu;
+        import android.view.MenuInflater;
+        import android.view.MenuItem;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+        import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-public class FictionActivity extends AppCompatActivity {
-//    public static final String category="Fiction";
+public class NonFictionActivity extends AppCompatActivity {
+//    public static final String category="Nonfiction";
     public static final  int ADD_BOOK_REQUEST=1;
     public static final  int EDIT_BOOK_REQUEST=2;
     private RecyclerView recyclerView;
@@ -38,14 +37,14 @@ public class FictionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fiction2);
-        setTitle("Fiction Books");
+        setContentView(R.layout.activity_non_fiction);
+        setTitle("Nonfiction Books");
         FloatingActionButton floatingActnBtn=findViewById(R.id.floating_button);
         floatingActnBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(FictionActivity.this,AddEditbookActivity.class);
+                Intent intent=new Intent(NonFictionActivity.this,AddEditbookActivity.class);
                 startActivityForResult(intent,ADD_BOOK_REQUEST);
             }
         });
@@ -59,13 +58,13 @@ public class FictionActivity extends AppCompatActivity {
         booksViewModel.getAllBooks().observe(this, new Observer<List<Books>>() {
             @Override
             public void onChanged(List<Books> books) {
-                List<Books>fiction=new ArrayList<>();
+                List<Books>nonfiction=new ArrayList<>();
                 for(Books fictionBooks:books){
-                    if(fictionBooks.getCategory().equals("Fiction")){
-                        fiction.add(fictionBooks);
+                    if(fictionBooks.getCategory().equals("Nonfiction")){
+                        nonfiction.add(fictionBooks);
                     }
                 }
-                adapter.setBooks(fiction);
+                adapter.setBooks(nonfiction);
             }
         });
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT) {
@@ -83,7 +82,7 @@ public class FictionActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new BooksAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Books book) {
-                Intent intent=new Intent(FictionActivity.this,AddEditbookActivity.class);
+                Intent intent=new Intent(NonFictionActivity.this,AddEditbookActivity.class);
                 Log.i("",String.valueOf(book.getQuantity()));
                 intent.putExtra(AddEditbookActivity.EXTRA_ID,book.getBookId());
                 intent.putExtra(AddEditbookActivity.EXTRA_FICTION_TITLE,book.getBookName());
@@ -104,8 +103,8 @@ public class FictionActivity extends AppCompatActivity {
             String title=data.getStringExtra(AddEditbookActivity.EXTRA_FICTION_TITLE);
             String description=data.getStringExtra(AddEditbookActivity.EXTRA_FICTION_DESCRIPTION);
             String author=data.getStringExtra(AddEditbookActivity.EXTRA_FICTION_AUTHOR);
-            int quantity= data.getIntExtra(AddEditbookActivity.EXTRA_FICTION_QUANTITY,1);
             String category=data.getStringExtra(AddEditbookActivity.EXTRA_FICTION_CATEGORY);
+            int quantity= data.getIntExtra(AddEditbookActivity.EXTRA_FICTION_QUANTITY,1);
             Books savedBook=new Books(title,author,description,category,quantity);
             booksViewModel.insert(savedBook);
             Toast.makeText(this,"Book saved", Toast.LENGTH_SHORT).show();
