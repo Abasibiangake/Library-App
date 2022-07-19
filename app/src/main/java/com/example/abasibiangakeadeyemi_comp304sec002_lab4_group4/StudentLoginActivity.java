@@ -4,6 +4,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,6 +66,8 @@ public class StudentLoginActivity extends AppCompatActivity {
                             if (outputStudentID.contains(userLoginID) && outputStudentPassword.contains(studentLoginPassword)){
                                 Toast.makeText(StudentLoginActivity.this,
                                         "You are succesfully logged in! ", Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(StudentLoginActivity.this,FictionActivity.class);
+                                startActivity(intent);
                             }
                             else{
                                 Toast.makeText(StudentLoginActivity.this,
