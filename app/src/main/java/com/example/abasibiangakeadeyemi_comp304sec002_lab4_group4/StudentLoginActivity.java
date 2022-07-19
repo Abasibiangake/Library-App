@@ -6,7 +6,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,49 +37,101 @@ public class StudentLoginActivity extends AppCompatActivity {
         editStudentLoginPassword =  findViewById(R.id.studentLoginPassword);
         editStudentLoginId = findViewById(R.id.studentLoginID);
 
-        //if the LiveData already has data it will delivered
-        // to the observer
-        studentViewModel.getAllStudents().observe(this, new Observer<List<Student>>() {
-            @Override
-            public void onChanged(@Nullable List<Student> result) {
+        btnStudentLogin = findViewById(R.id.btnStudentLogin);
+        btnStudentLogin.setOnClickListener(new View.OnClickListener() {
+            //Implement the event handler method
+            public void onClick(View v) {
+                String userLoginID = editStudentLoginId.getText().toString();
 
-                for (Student student : result) {
-                    outputStudentID += student.getStudentId() + "\n";
-                    outputStudentPassword += student.getPassword() + "\n";
-                    outputStudentFirstName += student.getFirstname() + "\n";
+                String studentLoginPassword = editStudentLoginPassword.getText().toString();
+
+                if (userLoginID.isEmpty() || studentLoginPassword.isEmpty()) {
+                    Toast.makeText(StudentLoginActivity.this, "Please enter the valid login details.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-//                Toast.makeText(StudentLoginActivity.this,
-//                        outputStudentID +", "+outputStudentPassword, Toast.LENGTH_SHORT).show();
+                else{
+                    int StudentLoginID = Integer.parseInt(userLoginID);
+                    studentViewModel.getStudent(StudentLoginID ).observe(StudentLoginActivity.this, new Observer<Student >() {
 
-                btnStudentLogin = findViewById(R.id.btnStudentLogin);
-                btnStudentLogin.setOnClickListener(new View.OnClickListener() {
-                    //Implement the event handler method
-                    public void onClick(View v) {
-                        String userLoginID = editStudentLoginId.getText().toString();
-
-                        String studentLoginPassword = editStudentLoginPassword.getText().toString();
-
-                        if (userLoginID.isEmpty() || studentLoginPassword.isEmpty()) {
-                            Toast.makeText(StudentLoginActivity.this, "Please enter the valid login details.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        else{
-                            int StudentLoginID = Integer.parseInt(userLoginID);
-                            if (outputStudentID.contains(userLoginID) && outputStudentPassword.contains(studentLoginPassword)){
+                        @Override
+                        public void onChanged(Student student) {
+                            if(student!=null && student.getPassword().equals(studentLoginPassword)) {
                                 Toast.makeText(StudentLoginActivity.this,
                                         "You are succesfully logged in! ", Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(StudentLoginActivity.this,FictionActivity.class);
+                                SharedPreferences loginPreference = getSharedPreferences("login", 0);
+                                SharedPreferences.Editor prefsEditor = loginPreference.edit();
+                                 prefsEditor.putString("studentFName",student.getFirstname());
+                                prefsEditor.putString("studentLName",student.getLastname());
+                                prefsEditor.putInt("studentId",student.getStudentId());
+//
+                                prefsEditor.commit();
+                                Intent intent = new Intent(StudentLoginActivity.this, FictionActivity.class);
                                 startActivity(intent);
-                            }
-                            else{
+                            }else{
                                 Toast.makeText(StudentLoginActivity.this,
                                         "You entered invalid login details.\nTry Again! ", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }
-                });
+                    });
+
+
+
+                }
             }
         });
+
+
+
+        //if the LiveData already has data it will be delivered
+        // to the observer
+//        studentViewModel.getStudent().observe(this, new Observer<Student >() {
+//            @Override
+//            public void onChanged(@Nullable Student result) {
+//
+////                for (Student student : result) {
+////                    outputStudentID += student.getStudentId() + "\n";
+////                    outputStudentPassword += student.getPassword() + "\n";
+////                    outputStudentFirstName += student.getFirstname() + "\n";
+////                }
+////                Log.i("",outputStudentID);
+////                Log.i("",outputStudentFirstName);
+////                Toast.makeText(StudentLoginActivity.this,
+////                        outputStudentID +", "+outputStudentPassword, Toast.LENGTH_SHORT).show();
+//
+//                btnStudentLogin = findViewById(R.id.btnStudentLogin);
+//                btnStudentLogin.setOnClickListener(new View.OnClickListener() {
+//                    //Implement the event handler method
+//                    public void onClick(View v) {
+//                        String userLoginID = editStudentLoginId.getText().toString();
+//
+//                        String studentLoginPassword = editStudentLoginPassword.getText().toString();
+//
+//                        if (userLoginID.isEmpty() || studentLoginPassword.isEmpty()) {
+//                            Toast.makeText(StudentLoginActivity.this, "Please enter the valid login details.", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                        else{
+//                            int StudentLoginID = Integer.parseInt(userLoginID);
+//                            if (outputStudentID.contains(userLoginID) && outputStudentPassword.contains(studentLoginPassword)){
+//                                Toast.makeText(StudentLoginActivity.this,
+//                                        "You are succesfully logged in! ", Toast.LENGTH_SHORT).show();
+//                                SharedPreferences loginPreference= getSharedPreferences("login", 0);
+//                                SharedPreferences.Editor prefsEditor= loginPreference.edit();
+////                                String studentName= ;
+////                                prefsEditor.putString("payment",totalAmount);
+////                                prefsEditor.commit();
+//                                Intent intent=new Intent(StudentLoginActivity.this,FictionActivity.class);
+//                                startActivity(intent);
+//                            }
+//                            else{
+//                                Toast.makeText(StudentLoginActivity.this,
+//                                        "You entered invalid login details.\nTry Again! ", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }
+//                });
+//            }
+//        });
     }
 }
 

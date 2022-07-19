@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class FictionActivity extends AppCompatActivity {
     public static final  int EDIT_BOOK_REQUEST=2;
     private RecyclerView recyclerView;
     private BooksViewModel booksViewModel;
+    private SharedPreferences pref;
 
 
     @Override
@@ -40,7 +42,14 @@ public class FictionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fiction2);
         setTitle("Fiction Books");
+        pref= getSharedPreferences("login",0);
+
         FloatingActionButton floatingActnBtn=findViewById(R.id.floating_button);
+        int studentId=pref.getInt("studentId",-1);
+        //hide the floating action button if its a student logged in
+        if(studentId!=-1){
+floatingActnBtn.hide();
+        }
         floatingActnBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -84,7 +93,6 @@ public class FictionActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Books book) {
                 Intent intent=new Intent(FictionActivity.this,AddEditbookActivity.class);
-                Log.i("",String.valueOf(book.getQuantity()));
                 intent.putExtra(AddEditbookActivity.EXTRA_ID,book.getBookId());
                 intent.putExtra(AddEditbookActivity.EXTRA_FICTION_TITLE,book.getBookName());
                 intent.putExtra(AddEditbookActivity.EXTRA_FICTION_AUTHOR,book.getAuthorName());
@@ -134,6 +142,12 @@ public class FictionActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu (Menu menu){
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu,menu);
+        MenuItem item=menu.findItem(R.id.profile);
+        int studentId=pref.getInt("studentId",-1);
+        //hidng the profile icon if it's not a student logged in
+        if(item!=null && studentId<1){
+            item.setVisible(false);
+        }
         return true;
     }
     @Override
@@ -154,6 +168,10 @@ public class FictionActivity extends AppCompatActivity {
             case R.id.history:
                 Intent historyIntent = new Intent(this, HistoryActivity.class);
                 startActivity(historyIntent);
+                break;
+            case R.id.profile:
+                Intent profileIntent = new Intent(this, StudentProfileActivity.class);
+                startActivity(profileIntent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_marginVertical="10dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".StudentProfileActivity">
+
+    <TextView
+        android:id="@+id/profile_studentId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student id:"
+        />
+    <TextView
+        android:id="@+id/profile_studentFName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student First  Name:"
+        />
+    <TextView
+        android:id="@+id/profile_studentLName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Last  Name:"
+        />
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+</LinearLayout>
