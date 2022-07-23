@@ -22,6 +22,9 @@ public class BooksViewModel extends AndroidViewModel {
     public void insert(Books book){
         booksRepository.insertBook(book);
     }
+    public LiveData<Books>getBooks(int id){
+        return booksRepository.getBookById(id);
+    }
 
     public void update(Books book){
         booksRepository.updateBook(book);

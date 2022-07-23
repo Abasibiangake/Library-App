@@ -11,6 +11,7 @@ package com.example.abasibiangakeadeyemi_comp304sec002_lab4_group4;
         import androidx.recyclerview.widget.RecyclerView;
 
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.os.Bundle;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class EducationalActivity extends AppCompatActivity {
     public static final  int EDIT_BOOK_REQUEST=2;
     private RecyclerView recyclerView;
     private BooksViewModel booksViewModel;
+    private SharedPreferences pref,prefLib;
 
 
     @Override
@@ -39,7 +41,27 @@ public class EducationalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_educational);
         setTitle("Educational Books");
+        pref= getSharedPreferences("login",0);
         FloatingActionButton floatingActnBtn=findViewById(R.id.floating_button);
+
+        int studentId=pref.getInt("studentId",-1);
+        int librarianId = pref.getInt("librarianId",-1);
+
+
+//        Toast.makeText(EducationalActivity.this,
+//                "librarian ID IS "+librarianId + "\nSTUDENT ID is! " + studentId
+//                        + "\nCurrent ID is! " + currentid, Toast.LENGTH_SHORT).show();
+
+        //compare based on id of logged in user
+        if (librarianId != -1){
+            floatingActnBtn.show();
+        }
+        //hide the floating action button if its a student logged in
+        if(studentId != -1 ){
+            floatingActnBtn.hide();
+//            Toast.makeText(FictionActivity.this,
+//                    "STUDENT ID MORE THAN 1! " + studentId, Toast.LENGTH_SHORT).show();
+        }
         floatingActnBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -93,6 +115,33 @@ public class EducationalActivity extends AppCompatActivity {
                 startActivityForResult(intent,EDIT_BOOK_REQUEST);
 
             }
+
+            @Override
+            public void onBorrowBtnClick(Books borrowedBooks) {
+                Toast.makeText(EducationalActivity.this,
+                        "This book Id is: "+borrowedBooks.getBookId(), Toast.LENGTH_SHORT).show();
+                SharedPreferences borrowbookPreference = getSharedPreferences("bookBorrowed", 0);
+                SharedPreferences.Editor prefsEditor = borrowbookPreference.edit();
+                prefsEditor.putString("bookTitle",borrowedBooks.getBookName());
+                prefsEditor.putString("bookAuthor",borrowedBooks.getAuthorName());
+                prefsEditor.putString("bookCategory",borrowedBooks.getCategory());
+                prefsEditor.putString("bookDesc",borrowedBooks.getBookDescription());
+                prefsEditor.putInt("bookId",borrowedBooks.getBookId());//
+                prefsEditor.commit();
+
+
+                int bookDeleteWithID = borrowedBooks.getBookId();
+                for (Books b: booksViewModel.getAllBooks().getValue()){
+                    if (b.getBookId() == bookDeleteWithID){
+                        int newQuantity = b.getQuantity() -1;
+                        b.setQuantity(newQuantity);
+                        booksViewModel.update(b);
+                        Toast.makeText(EducationalActivity.this,
+                                "You have borrowed this book ", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
         });
     }
 
@@ -138,9 +187,12 @@ public class EducationalActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        pref= getSharedPreferences("login",0);
+        int Id=pref.getInt("studentId",-1);
         switch (item.getItemId()){
             case R.id.fiction:
                 Intent fictionIntent = new Intent(this, FictionActivity.class);
+                fictionIntent.putExtra("module", Id);
                 startActivity(fictionIntent);
                 break;
             case R.id.non_fiction:
@@ -154,6 +206,10 @@ public class EducationalActivity extends AppCompatActivity {
             case R.id.history:
                 Intent historyIntent = new Intent(this, HistoryActivity.class);
                 startActivity(historyIntent);
+                break;
+            case R.id.profile:
+                Intent profileIntent = new Intent(this, StudentProfileActivity.class);
+                startActivity(profileIntent);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

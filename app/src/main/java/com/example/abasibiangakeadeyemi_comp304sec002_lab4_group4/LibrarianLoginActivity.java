@@ -4,6 +4,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,49 +33,118 @@ public class LibrarianLoginActivity extends AppCompatActivity {
         //imitialise variables
         librarianViewModel = ViewModelProviders.of(this).get(LibrarianViewModel.class);
 
+
         editLibrarianLoginPassword =  findViewById(R.id.librarianPassword);
         editLibrarianLoginId = findViewById(R.id.librarianID);
 
-        //if the LiveData already has data it will delivered
-        // to the observer
-        librarianViewModel.getAllLibrarian().observe(this, new Observer<List<Librarian>>() {
-            @Override
-            public void onChanged(@Nullable List<Librarian> resultLibrarian) {
+        btnLibrarianLogin = findViewById(R.id.btnLibrarianLogin);
+        btnLibrarianLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String userLibLoginID = editLibrarianLoginId.getText().toString();
 
-                for (Librarian librarian : resultLibrarian) {
-                    outputLibrarianID += librarian.getLibrarianId() + "\n";
-                    outputLibrarianPassword += librarian.getPassword() + "\n";
-                    outputLibrarianFirstName += librarian.getFirstName() + "\n";
+                String librarianLoginPassword = editLibrarianLoginPassword.getText().toString();
+
+                if (userLibLoginID.isEmpty() || librarianLoginPassword.isEmpty()) {
+                    Toast.makeText(LibrarianLoginActivity.this, "Please enter the valid login details.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-//                Toast.makeText(LibrarianLoginActivity.this,
-//                        outputLibrarianID +", "+outputLibrarianPassword, Toast.LENGTH_SHORT).show();
+                else{
+                    int librarianLoginID = Integer.parseInt(userLibLoginID);
+                    librarianViewModel.getLibrarian(librarianLoginID).observe(LibrarianLoginActivity.this, new Observer<Librarian>() {
 
-                btnLibrarianLogin = findViewById(R.id.btnLibrarianLogin);
-                btnLibrarianLogin.setOnClickListener(new View.OnClickListener() {
-                    //Implement the event handler method
-                    public void onClick(View v) {
-                        String userLibLoginID = editLibrarianLoginId.getText().toString();
-
-                        String librarianLoginPassword = editLibrarianLoginPassword.getText().toString();
-
-                        if (userLibLoginID.isEmpty() || librarianLoginPassword.isEmpty()) {
-                            Toast.makeText(LibrarianLoginActivity.this, "Please enter the valid login details.", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        else{
-                            int librarianLoginID = Integer.parseInt(userLibLoginID);
-                            if (outputLibrarianID.contains(userLibLoginID) && outputLibrarianPassword.contains(librarianLoginPassword)){
+                        @Override
+                        public void onChanged(Librarian librarian) {
+                            if(librarian!=null && librarian.getPassword().equals(librarianLoginPassword)) {
                                 Toast.makeText(LibrarianLoginActivity.this,
                                         "You are succesfully logged in as a Librarian! ", Toast.LENGTH_SHORT).show();
-                            }
-                            else{
+                                SharedPreferences loginlibPreference = getSharedPreferences("login", 0);
+                                SharedPreferences.Editor prefslibEditor = loginlibPreference.edit();
+                                prefslibEditor.putInt("librarianId",librarian.getLibrarianId());
+
+                                //
+                                prefslibEditor.commit();
+                                Intent intent = new Intent(LibrarianLoginActivity.this, FictionActivity.class);
+                                intent.putExtra("module", librarian.getLibrarianId());
+                                startActivity(intent);
+                            }else{
                                 Toast.makeText(LibrarianLoginActivity.this,
                                         "You entered invalid login details.\nTry Again! ", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    }
-                });
+
+
+                    });
+
+
+
+                }
             }
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        editLibrarianLoginPassword =  findViewById(R.id.librarianPassword);
+//        editLibrarianLoginId = findViewById(R.id.librarianID);
+//
+//        //if the LiveData already has data it will delivered
+//        // to the observer
+//        librarianViewModel.getAllLibrarian().observe(this, new Observer<List<Librarian>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Librarian> resultLibrarian) {
+//
+//                for (Librarian librarian : resultLibrarian) {
+//                    outputLibrarianID += librarian.getLibrarianId() + "\n";
+//                    outputLibrarianPassword += librarian.getPassword() + "\n";
+//                    outputLibrarianFirstName += librarian.getFirstName() + "\n";
+//                }
+////                Toast.makeText(LibrarianLoginActivity.this,
+////                        outputLibrarianID +", "+outputLibrarianPassword, Toast.LENGTH_SHORT).show();
+//
+//                btnLibrarianLogin = findViewById(R.id.btnLibrarianLogin);
+//                btnLibrarianLogin.setOnClickListener(new View.OnClickListener() {
+//                    //Implement the event handler method
+//                    public void onClick(View v) {
+//                        String userLibLoginID = editLibrarianLoginId.getText().toString();
+//
+//                        String librarianLoginPassword = editLibrarianLoginPassword.getText().toString();
+//
+//                        if (userLibLoginID.isEmpty() || librarianLoginPassword.isEmpty()) {
+//                            Toast.makeText(LibrarianLoginActivity.this, "Please enter the valid login details.", Toast.LENGTH_SHORT).show();
+//                            return;
+//                        }
+//                        else{
+//                            int librarianLoginID = Integer.parseInt(userLibLoginID);
+//                            if (outputLibrarianID.contains(userLibLoginID) && outputLibrarianPassword.contains(librarianLoginPassword)){
+//                                Toast.makeText(LibrarianLoginActivity.this,
+//                                        "You are succesfully logged in as a Librarian! ", Toast.LENGTH_SHORT).show();
+//
+//                                SharedPreferences loginlibPreference = getSharedPreferences("Liblogin", 0);
+//                                SharedPreferences.Editor prefslibEditor = loginlibPreference.edit();
+//                                prefslibEditor.putInt("librarianId",librarian.getLibrarianId());
+//                                Intent intent = new Intent(LibrarianLoginActivity.this, FictionActivity.class);
+//                                startActivity(intent);
+//                            }
+//                            else{
+//                                Toast.makeText(LibrarianLoginActivity.this,
+//                                        "You entered invalid login details.\nTry Again! ", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }
+//                });
+//            }
+//        });

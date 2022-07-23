@@ -24,6 +24,9 @@ public interface BooksDao {
 
     @Delete
     void delete(Books book);
+    //get book by book id
+    @Query("select * from booksTable where bookId= :id")
+    LiveData<Books> getBookById(int id);
 }
 
 

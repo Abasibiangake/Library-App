@@ -16,4 +16,8 @@ public interface LibrarianDAO {
     //monitor query result changes with live data
     @Query("select * from Librarian order by firstname")
     LiveData<List<Librarian>> getAllLibrarian();
+
+    //get librarian by student id
+    @Query("select * from Librarian where librarianId= :id")
+    LiveData<Librarian> getLibrarianById(int id);
 }

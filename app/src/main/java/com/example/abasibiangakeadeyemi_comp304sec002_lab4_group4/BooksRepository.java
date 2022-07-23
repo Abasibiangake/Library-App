@@ -71,6 +71,12 @@ public class BooksRepository {
             }
         }).start();
     }
+
+    public LiveData<Books> getBookById(int id) {
+
+        //gets book by id
+         return booksDao.getBookById(id);
+    }
 }
 
 
