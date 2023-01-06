@@ -9,6 +9,7 @@ import java.util.List;
 public class StudentRepository {
     private final StudentDAO studentDAO;
     private LiveData<List<Student>> studentList;
+    private LiveData<Student> student;
 
     public StudentRepository(Context context) {
         //create a database object
@@ -27,6 +28,9 @@ public class StudentRepository {
     public void insertStudent(Student student) {
         insertStudentAsync(student);
     }
+
+    //gets student by id
+    public LiveData<Student> getStudentById(int id){ return studentDAO.getStudentById(id); }
     //updates a student asynchronously
     public void updateStudent(Student student) {
         updateStudentAsync(student);
@@ -48,6 +52,19 @@ public class StudentRepository {
             }
         }).start();
     }
+
+//    private void getStudentByIdAsync(final int id) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    studentDAO.getStudentById(id);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
 
     //Update and other queries must be done in AsyncTask or IT SHOULD NOT BE DONE ON MAIN UI THREAD
     private void updateStudentAsync(final Student student) {

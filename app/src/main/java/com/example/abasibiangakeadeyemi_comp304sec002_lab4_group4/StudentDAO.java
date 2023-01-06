@@ -30,4 +30,9 @@ public interface StudentDAO
     //monitor query result changes with live data
     @Query("select * from Student order by firstname")
     LiveData<List<Student>>getAllStudents();
+    //get student by student id
+    @Query("select * from Student where studentId= :id")
+    LiveData<Student>getStudentById(int id);
+
+
 }

@@ -3,6 +3,8 @@ package com.example.abasibiangakeadeyemi_comp304sec002_lab4_group4;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.List;
+
 @Entity
 public class Student {
     @PrimaryKey
@@ -10,8 +12,8 @@ public class Student {
     private String firstname;
     private String lastname;
     private String password;
-    private int bookId;
-
+//    private int bookId;
+//private List<Books> borrowedBooks;
 //    public Student(){}
     public Student(int studentId, String firstname, String lastname, String password) {
         this.studentId = studentId;
@@ -48,11 +50,13 @@ public class Student {
         this.password = password;
     }
 
-    public int getBookId() {
-        return bookId;
-    }
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
+//    public List<Books> getBorrowedBooks() {
+//        return borrowedBooks;
+//    }
+//    public void setBorrowedBooks(Books book) {
+//        this.borrowedBooks.add(book);
+//    }
+
+
 
 }
