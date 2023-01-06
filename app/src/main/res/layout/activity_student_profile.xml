@@ -10,6 +10,13 @@
     android:layout_height="match_parent"
     tools:context=".StudentProfileActivity">
 
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Student Profile"
+       android:textSize="20dp"
+       android:layout_margin="20dp"
+       />
     <TextView
         android:id="@+id/profile_studentId"
         android:layout_width="wrap_content"
@@ -28,9 +35,37 @@
         android:layout_height="wrap_content"
         android:text="Student Last  Name:"
         />
-    <ListView
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       android:layout_marginBottom="10dp"
+       android:textStyle="bold"
+       android:text="List Of Borrowed Books"/>
+    <TextView
+        android:id="@+id/list_of_borrowed_books"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/borrowed_book_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/book_items"
         />
 
+
 </LinearLayout>
+
+<!--<ListView-->
+<!--android:id="@+id/borrowedBookListView"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--    />-->
+
+<!--<androidx.recyclerview.widget.RecyclerView-->
+<!--android:id="@+id/borrowed_book_recycler"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--tools:listitem="@layout/book_items"-->
+<!--    />-->

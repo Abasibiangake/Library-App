@@ -1,5 +1,6 @@
 package com.example.abasibiangakeadeyemi_comp304sec002_lab4_group4;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookHolder> {
     private List<Books> books=new ArrayList<>();
+    private List<Books> borrowedBooks=new ArrayList<>();
     private OnItemClickListener listener;
 
     @NonNull
@@ -41,42 +43,60 @@ public class BooksAdapter extends RecyclerView.Adapter<BooksAdapter.BookHolder> 
         this.books=books;
         notifyDataSetChanged();
     }
+    public void setBorrowedBooks(List<Books> borrowedBooks){
+        this.borrowedBooks = borrowedBooks;
+        notifyDataSetChanged();
+    }
     public Books getBookAt(int position){
         return books.get(position);
     }
 
     class BookHolder extends RecyclerView.ViewHolder{
         private TextView bookAuthorTv;
-    private TextView bookNameTv;
-    private TextView bookQuantityTv;
-    private Button borrowBookBtn;
-    private TextView bookCategoryTv;
+        private TextView bookNameTv;
+        private TextView bookQuantityTv;
+        private Button borrowBookBtn;
+        private TextView bookCategoryTv;
         public BookHolder(View itemView) {
             super(itemView);
 
             bookAuthorTv=itemView.findViewById(R.id.tv_book_author);
-        bookNameTv=itemView.findViewById(R.id.tv_book_name);
-        bookQuantityTv=itemView.findViewById(R.id.tv_book_quantity);
-        borrowBookBtn=itemView.findViewById(R.id.btn_borrow_book);
-        bookCategoryTv=itemView.findViewById(R.id.tv_book_category);
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position=getAdapterPosition();
-                if(listener!=null && position!=RecyclerView.NO_POSITION){
-                    listener.onItemClick(books.get(position));
+            bookNameTv=itemView.findViewById(R.id.tv_book_name);
+            bookQuantityTv=itemView.findViewById(R.id.tv_book_quantity);
+            borrowBookBtn=itemView.findViewById(R.id.btn_borrow_book);
+            bookCategoryTv=itemView.findViewById(R.id.tv_book_category);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position=getAdapterPosition();
+                    if(listener!=null && position!=RecyclerView.NO_POSITION){
+                        listener.onItemClick(books.get(position));
+                    }
+
                 }
+            });
 
-            }
-        });
+            borrowBookBtn.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    int position=getAdapterPosition();
+                    if(listener!=null && position!=RecyclerView.NO_POSITION){
+                        listener.onBorrowBtnClick(books.get(position));
+                    }
+                }
+            });
+
+        }
+    }
+    public interface OnItemClickListener{
+            void onItemClick(Books book);
+            void onBorrowBtnClick(Books borrowedBooks);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+            this.listener=listener;
 
     }
-    }
-public interface OnItemClickListener{
-        void onItemClick(Books book);
-}
-public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener=listener;
 
-}
+
 }

@@ -66,6 +66,7 @@ public class StudentLoginActivity extends AppCompatActivity {
 //
                                 prefsEditor.commit();
                                 Intent intent = new Intent(StudentLoginActivity.this, FictionActivity.class);
+                                intent.putExtra("module", student.getStudentId());
                                 startActivity(intent);
                             }else{
                                 Toast.makeText(StudentLoginActivity.this,

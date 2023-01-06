@@ -24,6 +24,10 @@ public class LibrarianViewModel extends AndroidViewModel {
     public void insertStudent(Librarian librarian){
         librarianRepository.insert(librarian);
     }
+    public LiveData<Librarian>getLibrarian(int id){
+        return librarianRepository.getLibrarianById(id);
+    }
+
 
     //returns query results as live data object
     LiveData<List<Librarian>> getAllLibrarian() { return allLibrarians; }

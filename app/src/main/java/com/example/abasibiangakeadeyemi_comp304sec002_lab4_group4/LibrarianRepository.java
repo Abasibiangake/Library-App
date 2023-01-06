@@ -23,6 +23,9 @@ public class LibrarianRepository {
         return librarianList;
     }
 
+    //gets librarian by id
+    public LiveData<Librarian> getLibrarianById(int id){ return librarianDAO.getLibrarianById(id); }
+
     //inserts a student asynchronously
     public void insert(Librarian librarian) {
         insertLibrarianAsync(librarian);
